@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <meta name="twitter:card" content="summary">
+    <meta property="twitter:title" content="<%= title %>">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <header id="anchor">
+        <div class="header-content">
+          <a href="/">
+            <h1>ZUTOMAYO DATABASE</h1>
+          </a>
+        </div>
+      </header>
+      <main>
+        <h2>ZUTOMAYO COUNTER</h2>
+        <p>ライブで聴いた曲をカウントできます。<br>以下のリストから参加したライブを選択し、「カウントする」ボタンを押してください。</p>
+        <form action="/counter/results" method="post">
+          <button class="btn" type="submit">カウントする</button>
+          <ul>
+            <% contents.forEach((content) => { %>
+            <% const date = new Date(content.liveDate);%>
+            <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
+            <label for="checking<%= content.id %>">
+              <li class="checkbox">
+                <input id="checking<%= content.id %>" type="checkbox" name="liveId" value="<%= content.id %>">
+                <div>
+                  <h3><%= content.liveTitle %></h3>
+                  <p><%= str %></p>
+                  <p>@<%= content.hako.hakoName %></p>
+                </div>
+              </li>
+            </label>
+            <% }); %>
+          </ul>
+        </form>
+        <a class="back" href="#anchor">上に戻る</a>
+      </main>
+      <footer>
+        <div class="footer-content">
+          <p>ZUTOMAYO DATABASE</p>
+          <a href="#">twitter</a>
+          <a href="#">github</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
+
+<!--
+<form action="/counter/get" method="get">
+  <input type="checkbox" name="liveId" value="1"> 1
+  <input type="checkbox" name="liveId" value="2"> 2
+  <input type="checkbox" name="liveId" value="3"> 3
+  <button type="submit">Go</button>
+</form>
+-->

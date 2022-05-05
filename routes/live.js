@@ -1,9 +1,28 @@
 var express = require('express');
 var router = express.Router();
+const db = require('../models/index');
+const Op = db.Sequelize.Op;
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.render('live');
+router.get('/:liveNum', async (req, res, next) => {
+  const setlistAll = await db.song_live.findAll({
+    oder: [['number', 'ASC']],
+    where: { liveId: req.params.liveNum },
+    include: [
+      { model: db.song, required: false },
+    ],
+  });
+  const live = await db.live.findOne({
+    where: { id: req.params.liveNum },
+    include: [
+      { model: db.hako, required: false },
+    ]
+  });
+  const data = {
+    title: 'SETLIST | ZUTOMAYO DATABASE',
+    songs: setlistAll,
+    lives: live
+  };
+  res.render('live', data);
 });
 
 module.exports = router;

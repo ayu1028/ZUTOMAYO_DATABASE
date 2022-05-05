@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>セットリスト集 | ZUTOMAYO DATABASE</title>
+    <title><%= title %></title>
     <meta name="twitter:card" content="summary">
-    <meta property="twitter:title" content="Route 84 Style">
+    <meta property="twitter:title" content="<%= title %>">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
@@ -19,53 +19,21 @@
         </div>
       </header>
       <main>
-        <p>ライブセットリスト集</p>
+        <h2>ライブセットリスト集</h2>
         <ul>
+          <% contents.forEach((content) => { %>
+          <% const date = new Date(content.liveDate); %>
+          <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
           <li>
-            <a href="/live">
+            <a href="/live/<%= content.id %>">
               <div>
-                <h2>ZUTOMAYO FACTORY 「鷹は飢えても踊り忘れず」 [day1 ”memory_limit=-1”]</h2>
-                <p>2022年4月16日</p>
-                <p>@さいたまスーパーアリーナ</p>
+                <h3><%= content.liveTitle %></h3>
+                <p><%= str %></p>
+                <p>@<%= content.hako.hakoName %></p>
               </div>
             </a>
           </li>
-          <li>
-            <a href="#">
-              <div>
-                <h2>ZUTOMAYO FACTORY 「鷹は飢えても踊り忘れず」 [day2 ”ob_start”]</h2>
-                <p>2022年4月17日</p>
-                <p>@さいたまスーパーアリーナ</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div>
-                <h2>ZUTOMAYO FACTORY 「鷹は飢えても踊り忘れず」 [day2 ”ob_start”]</h2>
-                <p>2022年4月17日</p>
-                <p>@さいたまスーパーアリーナ</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div>
-                <h2>ZUTOMAYO FACTORY 「鷹は飢えても踊り忘れず」 [day2 ”ob_start”]</h2>
-                <p>2022年4月17日</p>
-                <p>@さいたまスーパーアリーナ</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <div>
-                <h2>ZUTOMAYO FACTORY 「鷹は飢えても踊り忘れず」 [day2 ”ob_start”]</h2>
-                <p>2022年4月17日</p>
-                <p>@さいたまスーパーアリーナ</p>
-              </div>
-            </a>
-          </li>
+          <% }); %> 
         </ul>
       </main>
       <footer>

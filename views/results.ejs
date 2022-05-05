@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header id="anchor">
+        <div class="header-content">
+          <a href="/">
+            <h1>ZUTOMAYO DATABASE</h1>
+          </a>
+        </div>
+      </header>
+      <main>
+<% let countSongs = []; %>
+<% for(let i = 0; i < songsAll.length; i ++) { %>
+<% countSongs[i] = { songName: songsAll[i].songName, times: heardSongs.filter(n => n.songId === songsAll[i].id).length } %>
+<% countSongs.sort((a, b) => b.times - a.times); %>
+<% }; %>
+        <h2>カウント結果</h2>
+        <p>参加ライブ数：<%= lives %>／<%= livesAll.length %></p>
+        <p>聴いた曲数：<%= countSongs.filter(n => n.times !== 0).length %>／<%= songsAll.length %>(未公開曲除く)</p>
+        <p>最も聴いている曲：<%= countSongs[0].songName %>(<%= countSongs[0].times %>回)</p>
+        <a class="twitter-share-button"
+          href="https://twitter.com/intent/tweet"
+          data-size="large"
+          data-text="参加ライブ数：<%= lives %>／<%= livesAll.length %>
+聴いた曲数：<%= countSongs.filter(n => n.times !== 0).length %>／<%= songsAll.length %>
+最も聴いている曲：<%= countSongs[0].songName %>(<%= countSongs[0].times %>回)
+"
+          data-hashtags="zutomayo_db,ずっと真夜中でいいのに"
+          data-url="https://zutomayo-database.herokuapp.com"
+          data-related="twitterapi,twitter">
+        Tweet
+        </a>
+        <h3>曲別聴いた回数ランキング</h3>
+          <ul>
+            <% countSongs.filter(n => n.times !== 0).forEach((songs) => { %>
+            <li class="flexbox">
+              <div>
+                <h3><%= songs.songName %></h3>
+              </div>
+              <div class="count over10"><%= songs.times %></div>
+            </li>
+            <% }); %>
+          </ul>
+        </form>
+        <a class="back" href="#anchor">上に戻る</a>
+      </main>
+      <footer>
+        <div class="footer-content">
+          <p>ZUTOMAYO DATABASE</p>
+          <a href="#">twitter</a>
+          <a href="#">github</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
