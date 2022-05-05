@@ -31,7 +31,7 @@
           href="https://twitter.com/intent/tweet"
           data-size="large"
           data-text="参加ライブ数：<%= lives %>／<%= livesAll.length %>
-聴いた曲数：<%= countSongs.filter(n => n.times !== 0).length %>／<%= songsAll.length %>
+聴いた曲数：<%= countSongs.filter(n => n.times !== 0).length %>／<%= songsAll.length %>(未公開曲除く)
 最も聴いている曲：<%= countSongs[0].songName %>(<%= countSongs[0].times %>回)
 "
           data-hashtags="zutomayo_db,ずっと真夜中でいいのに"
