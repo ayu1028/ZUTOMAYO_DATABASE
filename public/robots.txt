@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://zutomayo-database.herokuapp.com/sitemap.xml
