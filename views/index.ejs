@@ -5,10 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
+    <meta name="description" content="「ずっと真夜中でいいのに。」の過去のライブセットリストのデータベースです。">
+    <meta property="og:description" content="「ずっと真夜中でいいのに。」の過去のライブセットリストのデータベースです。">
     <meta name="twitter:card" content="summary">
     <meta property="og:url" content="https://zutomayo-database.herokuapp.com/" />
     <meta property="og:title" content="<%= title %>" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTPSL4VJ85"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BTPSL4VJ85');
+    </script>
   </head>
   <body>
     <div class="container">
@@ -21,6 +32,7 @@
       </header>
       <main>
         <h2>ZUTOMAYO DATABASEへようこそ！</h2>
+        <p>このサイトでは、<a class="text" href="https://zutomayo.net/" target="_blank" rel="noopener noreferrer">ずっと真夜中でいいのに。</a>の過去のライブのセットリスト情報を掲載しています。<br>過去参加したライブからどの曲を何回聴いたかカウントする機能もありますので、ぜひ使ってみていただけたらと思います。</p>
         <ul>
           <li>
             <a href="/setlist">

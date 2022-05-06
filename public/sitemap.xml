@@ -2,4 +2,10 @@
   <url>
     <loc>https://zutomayo-database.herokuapp.com</loc>
   </url>
+  <url>
+    <loc>https://zutomayo-database.herokuapp.com/setlist</loc>
+  </url>
+  <url>
+    <loc>https://zutomayo-database.herokuapp.com/counter</loc>
+  </url>
 </urlset>
