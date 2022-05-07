@@ -42,5 +42,7 @@ module.exports = {
     { id: 40, songName: '袖のキルト' },
     { id: 41, songName: '夜中のキスミ' },
     { id: 42, songName: 'ミラーチューン' },
+    { id: 43, songName: '琥珀色の街、上海蟹の朝(くるりCover)' },
+    { id: 45, songName: 'フルムーンダンシング(未公開曲)' },
   ]
 };
