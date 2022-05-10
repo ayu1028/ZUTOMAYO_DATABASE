@@ -21,9 +21,12 @@ router.get('/', async (req, res, next) => {
 router.post('/results', async (req, res, next) => {
   if(req.body.liveId) {
     const songsAll = await db.song.findAll();
+    //console.log(songsAll);
     const livesAll = await db.live.findAll();
-    const whereForm = req.body.liveId.length === 1 ? 
-      { liveId: req.body.liveId } : { liveId: { [Op.or]: req.body.liveId } };
+    //console.log(livesAll);
+    const whereForm = Array.isArray(req.body.liveId) ? 
+    { liveId: { [Op.or]: req.body.liveId } } : { liveId: req.body.liveId } ;
+    console.log(whereForm);
     const heardSongs = await db.song_live.findAll({
       where: whereForm,
       include: [

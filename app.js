@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var setlistRouter = require('./routes/setlist');
 var liveRouter = require('./routes/live');
 var counterRouter = require('./routes/counter');
+var songRouter = require('./routes/song')
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use('/setlist', setlistRouter);
 app.use('/live', liveRouter);
 app.use('/counter', counterRouter);
+app.use('/song', songRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

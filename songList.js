@@ -44,5 +44,16 @@ module.exports = {
     { id: 42, songName: 'ミラーチューン' },
     { id: 43, songName: '琥珀色の街、上海蟹の朝(くるりCover)' },
     { id: 45, songName: 'フルムーンダンシング(未公開曲)' },
+    { id: 46, songName: 'フェノメノン(未公開曲)' },
+    { id: 47, songName: '黒く塗りつぶす僕らを(未公開曲)' },
+    { id: 48, songName: 'サメ(未公開曲)' },
+    { id: 49, songName: 'あの娘シークレット(Eve Cover)' },
+    { id: 50, songName: 'なんでもないや(RADWIMPS Cover)' },
+    { id: 51, songName: 'レディーレ(須田景凪Cover)' },
+    { id: 52, songName: '片目で異常に恋してる(ジェニーハイCover)' },
+    { id: 53, songName: 'フロントメモリー(神聖かまってちゃんCover)' },
+    { id: 54, songName: 'Lemon(米津玄師Cover)' },
+    { id: 55, songName: 'シャルル(須田景凪Cover)' },
+    { id: 56, songName: '命ばっかり。(ぬゆりCover)' },
   ]
 };

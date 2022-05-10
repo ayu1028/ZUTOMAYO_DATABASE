@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTPSL4VJ85"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BTPSL4VJ85');
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-content">
+          <a href="/">
+            <h1>ZUTOMAYO DATABASE</h1>
+          </a>
+        </div>
+      </header>
+      <main>
+        <div>
+          <h2><%= songData[0].songName %></h2>
+          <p>ライブで歌われた回数：<%= songData.length %>回</p>
+        </div>
+        <ul>
+          <% songData.forEach((song) => { %>
+          <li>
+            <a href="/live/<%= song.live.id %>">
+              <div>
+                <p><%= song.live.liveTitle %></p>
+              </div>
+            </a>
+          </li>
+          <% }); %>
+        </ul>
+      </main>
+      <footer>
+        <div class="footer-content">
+          <p>ZUTOMAYO DATABASE</p>
+          <a href="https://twitter.com/ayu_nanet_sun">twitter</a>
+          <a href="https://github.com/ayu1028">github</a>
+        </div>
+
+      </footer>
+    </div>
+  </body>
+</html>
