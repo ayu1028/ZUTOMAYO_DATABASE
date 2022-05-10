@@ -38,7 +38,7 @@ router.post('/results', async (req, res, next) => {
       heardSongs: heardSongs,
       songsAll: songsAll,
       livesAll: livesAll,
-      lives: req.body.liveId.length,
+      lives: Array.isArray(req.body.liveId) ? req.body.liveId.length : 1,
     };
     res.render('results', data);
   } else {
