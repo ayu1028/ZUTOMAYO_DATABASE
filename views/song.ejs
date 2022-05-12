@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://kit.fontawesome.com/f408a441a0.js" crossorigin="anonymous"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTPSL4VJ85"></script>
     <script>
@@ -17,12 +18,46 @@
     </script>
   </head>
   <body>
+    <nav>
+      <div class="side-menu-button-close">
+          <i class="fa-solid fa-xmark fa-2xl"></i>
+      </div>
+      <div class="nav-contents">
+        <a href="/">
+          TOP
+        </a>
+        <a href="/setlist">
+          SETLISTS
+        </a>
+        <a href="/song">
+          SONGS
+        </a>
+        <a href="/counter">
+          ZUTOMAYO COUNTER
+        </a>
+        <!--
+        <a href="/counter">
+          MY PAGE
+        </a>
+        -->
+      </div>
+    </nav>
     <div class="container">
       <header>
+        <div class="side-menu-button">
+            <i class="fa-solid fa-bars fa-xl"></i>
+        </div>
         <div class="header-content">
           <a href="/">
             <h1>ZUTOMAYO DATABASE</h1>
           </a>
+        </div>
+        <div class="login_button">
+          <!--
+          <a href="#">
+            <i class="fa-solid fa-right-to-bracket fa-xl"></i>
+          </a>
+          -->
         </div>
       </header>
       <main>
@@ -31,10 +66,15 @@
         </div>
         <ul>
           <% songs.forEach((song) => { %>
+          <% const date = new Date(song.releaseDate); %>
+          <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
           <li>
             <a href="/song/<%= song.id %>">
               <div>
-                <h2><%= song.songName %></h2>
+                <h3><%= song.songName %></h3>
+                <% if(song.releaseDate) { %>
+                <p>公開：<%= str %></p>
+                <% } %>
               </div>
             </a>
           </li>
@@ -47,8 +87,8 @@
           <a href="https://twitter.com/ayu_nanet_sun">twitter</a>
           <a href="https://github.com/ayu1028">github</a>
         </div>
-
       </footer>
     </div>
+    <script src="/javascripts/menu.js"></script>
   </body>
 </html>

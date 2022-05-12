@@ -14,6 +14,7 @@ router.get('/', async (req, res, next) => {
     title: 'LIVE | ZUTOMAYO DATABASE',
     contents: liveAll
   };
+  console.log(req.session);
   res.render('setlist', data);
 });
 

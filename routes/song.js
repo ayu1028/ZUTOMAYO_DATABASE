@@ -15,7 +15,10 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:song_id', async (req, res, next) => {
-  const song_data = await db.song_live.findAll({
+  const song_data = await db.song.findOne({
+    where: { id: req.params.song_id },
+  });
+  const song_live_data = await db.song_live.findAll({
     where: { songId: req.params.song_id },
     include: [
       { model: db.live, required: false },
@@ -24,7 +27,8 @@ router.get('/:song_id', async (req, res, next) => {
   });
   res.render('songData', {
     title: 'SONG DATA | ZUTOMAYO DATABASE',
-    songData: song_data
+    songData: song_data,
+    songLiveData: song_live_data
   });
 });
 

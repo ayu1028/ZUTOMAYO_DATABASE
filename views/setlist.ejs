@@ -8,6 +8,7 @@
     <meta name="twitter:card" content="summary">
     <meta property="twitter:title" content="<%= title %>">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://kit.fontawesome.com/f408a441a0.js" crossorigin="anonymous"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTPSL4VJ85"></script>
     <script>
@@ -19,16 +20,50 @@
     </script>
   </head>
   <body>
+    <nav>
+      <div class="side-menu-button-close">
+          <i class="fa-solid fa-xmark fa-2xl"></i>
+      </div>
+      <div class="nav-contents">
+        <a href="/">
+          TOP
+        </a>
+        <a href="/setlist">
+          SETLISTS
+        </a>
+        <a href="/song">
+          SONGS
+        </a>
+        <a href="/counter">
+          ZUTOMAYO COUNTER
+        </a>
+        <!--
+        <a href="/counter">
+          MY PAGE
+        </a>
+        -->
+      </div>
+    </nav>
     <div class="container">
       <header>
+        <div class="side-menu-button">
+            <i class="fa-solid fa-bars fa-xl"></i>
+        </div>
         <div class="header-content">
           <a href="/">
             <h1>ZUTOMAYO DATABASE</h1>
           </a>
         </div>
+        <div class="login_button">
+          <!--
+          <a href="#">
+            <i class="fa-solid fa-right-to-bracket fa-xl"></i>
+          </a>
+          -->
+        </div>
       </header>
       <main>
-        <h2>ライブセットリスト集</h2>
+        <h2>ライブセットリスト集(全<%= contents.length %>公演)</h2>
         <ul>
           <% contents.forEach((content) => { %>
           <% const date = new Date(content.liveDate); %>
@@ -54,5 +89,6 @@
 
       </footer>
     </div>
+    <script src="/javascripts/menu.js"></script>
   </body>
 </html>

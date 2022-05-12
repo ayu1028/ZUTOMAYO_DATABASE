@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
   song.init({
     songName: DataTypes.TEXT,
     special: DataTypes.INTEGER,
+    releaseDate: DataTypes.DATEONLY,
+    youtubeTag: DataTypes.TEXT,
+    remark: DataTypes.TEXT,
   }, {
     sequelize,
     modelName: 'song',
