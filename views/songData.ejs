@@ -35,11 +35,11 @@
         <a href="/counter">
           ZUTOMAYO COUNTER
         </a>
-        <!--
-        <a href="/counter">
+        <% if(typeof userId !== 'undefined') { %>
+        <a href="/mypage">
           MY PAGE
         </a>
-        -->
+        <% } %>
       </div>
     </nav>
     <div class="container">
@@ -53,11 +53,15 @@
           </a>
         </div>
         <div class="login_button">
-          <!--
-          <a href="#">
+          <% if(typeof userId !== 'undefined') { %>
+          <a href="/logout">
+            <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+          </a>
+          <% } else { %>
+          <a href="/login/twitter">
             <i class="fa-solid fa-right-to-bracket fa-xl"></i>
           </a>
-          -->
+          <% } %>
         </div>
       </header>
       <main>
@@ -78,24 +82,16 @@
           <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/<%= songData.youtubeTag %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <% } %>
-        <!--
-        <h3>収録アルバム</h3>
-        <li>
-          <a href="#">
-            <div>
-              <h3></h3>
-              <p>公開：2021年10月21日</p>
-            </div>
-          </a>
-        </li>
-        -->
         <h3>歌われたライブ(回数：<%= songLiveData.length %>回)</h3>
         <ul>
           <% songLiveData.forEach((song) => { %>
           <li>
             <a href="/live/<%= song.live.id %>">
               <div>
+                <% const date = new Date(song.live.liveDate); %>
+                <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
                 <p><%= song.live.liveTitle %></p>
+                <p><%= str %></p>
               </div>
             </a>
           </li>
@@ -105,8 +101,8 @@
       <footer>
         <div class="footer-content">
           <p>ZUTOMAYO DATABASE</p>
-          <a href="https://twitter.com/ayu_nanet_sun">twitter</a>
-          <a href="https://github.com/ayu1028">github</a>
+          <a href="https://twitter.com/ayu_nanet_sun" target="_blank" rel="noopener noreferrer">twitter</a>
+          <a href="https://github.com/ayu1028" target="_blank" rel="noopener noreferrer">github</a>
         </div>
 
       </footer>

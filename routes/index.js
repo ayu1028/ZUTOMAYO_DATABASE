@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'ZUTOMAYO DATABASE' });
+  req.session.message = 0;
+  res.render('index', { 
+    title: 'ZUTOMAYO DATABASE',
+   });
 });
 
 module.exports = router;

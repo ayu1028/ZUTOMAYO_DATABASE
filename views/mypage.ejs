@@ -18,7 +18,7 @@
       gtag('config', 'G-BTPSL4VJ85');
     </script>
   </head>
-  <body id="anchor">
+  <body>
     <nav>
       <div class="side-menu-button-close">
           <i class="fa-solid fa-xmark fa-2xl"></i>
@@ -68,14 +68,16 @@
       <main>
 <% let countSongs = []; %>
 <% for(let i = 0; i < songsAll.length; i ++) { %>
-<% countSongs[i] = { id: songsAll[i].id, songName: songsAll[i].songName, special: songsAll[i].special, times: heardSongs.filter(n => n.songId === songsAll[i].id).length } %>
+<% countSongs[i] = {  id: songsAll[i].id, songName: songsAll[i].songName, special: songsAll[i].special, times: heardSongs.filter(n => n.songId === songsAll[i].id).length } %>
 <% countSongs.sort((a, b) => b.times - a.times); %>
 <% }; %>
 <% const rand = Math.floor(Math.random()*countSongs.filter(n => n.times === countSongs[0].times).length);%>
-        <h2>カウント結果</h2>
-        <p>参加ライブ数：<%= lives %></p>
-        <p>聴いた曲数(未公開曲除く)：<%= countSongs.filter(n => n.times !== 0 && n.special === 0).length %>／<%= songsAll.filter(n => n.special === 0).length %></p>
+        <div>
+          <h2><%= userName %>さんのMY PAGE</h2>
+          <p>参加ライブ数：<%= lives %></p>
+          <p>聴いた曲数(未公開曲除く)：<%= countSongs.filter(n => n.times !== 0 && n.special === 0).length %>／<%= songsAll.filter(n => n.special === 0).length %></p>
         <p>聴いた曲数(未公開・カバー含む)：<%= countSongs.filter(n => n.times !== 0).length %>／<%= songsAll.length %></p>
+        <% if(countSongs[0].times !== 0) { %>
         <p>最も聴いている曲：<%= countSongs.filter(n => n.times === countSongs[0].times)[rand].songName %>
           (<%= countSongs.filter(n => n.times === countSongs[0].times)[rand].times %>回
           <% if(countSongs.filter(n => n.times === countSongs[0].times).length > 1 && countSongs[0].times !== 1) { %>
@@ -95,28 +97,38 @@
           data-related="twitterapi,twitter">
         Tweet
         </a>
-        <% if(typeof userId !== 'undefined') { %>
-        <div>
-          <form action="/counter/update" method="post">
-            <button class="btn" type="submit">結果を保存する</button>
-            <input type="text" name="query" value="<%= query %>" hidden>
-          </form>
-        </div>
         <% } %>
-        <h3>曲別聴いた回数ランキング</h3>
-          <ul>
-            <% countSongs.filter(n => n.times !== 0).forEach((songs) => { %>
-            <li>
-              <a class="flexbox" href="/song/<%= songs.id %>">
-                <div>
-                  <h3><%= songs.songName %></h3>
-                </div>
-                <div class="count over10"><%= songs.times %></div>
-              </a>
-            </li>
-            <% }); %>
-          </ul>
-        <a class="back" href="#anchor">上に戻る</a>
+          <a class="btn-update" href="/counter/<%= query %>">結果を更新する</a>
+        </div>
+        <h3>参加したライブ(<%= lives %>公演)</h3>
+        <ul>
+          <% attendedLives.forEach((live) => { %>
+          <% const date = new Date(live.liveDate); %>
+          <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
+          <li>
+            <a href="/live/<%= live.id %>">
+              <div>
+                <h3><%= live.liveTitle %></h3>
+                <p><%= str %></p>
+                <p>@<%= live.hako.hakoName %></p>
+              </div>
+            </a>
+          </li>
+          <% }); %> 
+        </ul>
+        <h3>聴いた曲</h3>
+        <ul>
+          <% countSongs.filter(n => n.times !== 0).forEach((songs) => { %>
+          <li>
+            <a class="flexbox" href="/song/<%= songs.id %>">
+              <div>
+                <h3><%= songs.songName %></h3>
+              </div>
+              <div class="count over10"><%= songs.times %></div>
+            </a>
+          </li>
+          <% }); %>
+        </ul>
       </main>
       <footer>
         <div class="footer-content">
@@ -124,6 +136,7 @@
           <a href="https://twitter.com/ayu_nanet_sun" target="_blank" rel="noopener noreferrer">twitter</a>
           <a href="https://github.com/ayu1028" target="_blank" rel="noopener noreferrer">github</a>
         </div>
+
       </footer>
     </div>
     <script src="/javascripts/menu.js"></script>

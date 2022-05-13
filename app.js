@@ -19,6 +19,10 @@ var setlistRouter = require('./routes/setlist');
 var liveRouter = require('./routes/live');
 var counterRouter = require('./routes/counter');
 var songRouter = require('./routes/song');
+var mypageRouter = require('./routes/mypage');
+const logoutRouter = require('./routes/logout');
+
+const setUser = require('./setUser');
 
 var app = express();
 
@@ -34,14 +38,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: 'secret-key',
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 6 * 60 * 60 * 1000 },
 }));
 
-/*
 app.use(passport.initialize());
 app.use(passport.session());
-*/
 
 passport.use(new TwitterStrategy(
     {
@@ -62,16 +65,48 @@ passport.deserializeUser(function(user, done) {
 });
 
 
-app.use('/', indexRouter);
-app.use('/setlist', setlistRouter);
-app.use('/live', liveRouter);
-app.use('/counter', counterRouter);
-app.use('/song', songRouter);
+app.use('/', setUser, indexRouter);
+app.use('/setlist', setUser, setlistRouter);
+app.use('/live', setUser, liveRouter);
+app.use('/counter', setUser, counterRouter);
+app.use('/song', setUser, songRouter);
+app.use('/mypage', setUser, mypageRouter);
+app.use('/logout', logoutRouter);
 
 app.get('/login/twitter', passport.authenticate('twitter'));
 app.get('/oauth/callback/twitter',passport.authenticate('twitter', { failureRedirect: '/' }), async (req, res) => {
-  console.log(req.user);
-  res.redirect('/');
+  const twitterId = req.user.id;
+  const userName = req.user.displayName;
+  console.log(userName);
+
+  const findUser = await db.user.findAll({
+    where: {twitterId: twitterId}
+  });
+  const userExists = findUser.length;
+  if(userExists) {
+    req.session.twitterId = twitterId;
+    req.session.userName = userName;
+    req.session.message =`${userName}でログインしました`;
+    res.redirect('/');
+  } else {
+    await db.sequelize.sync();
+    let trn = await db.sequelize.transaction();
+    const userForm = {
+      twitterId: twitterId,
+      searchQuery: '[0]',
+    };
+    try {
+      const createUser = await db.user.create(userForm, {transaction: trn});
+      await trn.commit();
+      req.session.twitterId = twitterId;
+      req.session.userName = userName;
+      req.session.message =`${userName}でログインしました`;
+      res.redirect('/');
+    } catch (err) {
+      await trn.rollback();
+      res.redirect('/');
+    }
+  }
 });
 
 // catch 404 and forward to error handler

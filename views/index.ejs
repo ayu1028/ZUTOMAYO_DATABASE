@@ -40,11 +40,11 @@
         <a href="/counter">
           ZUTOMAYO COUNTER
         </a>
-        <!--
-        <a href="/user">
+        <% if(typeof userId !== 'undefined') { %>
+        <a href="/mypage">
           MY PAGE
         </a>
-        -->
+        <% } %>
       </div>
     </nav>
     <div class="container">
@@ -58,11 +58,15 @@
           </a>
         </div>
         <div class="login_button">
-          <!--
-          <a href="#">
+          <% if(typeof userId !== 'undefined') { %>
+          <a href="/logout">
+            <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+          </a>
+          <% } else { %>
+          <a href="/login/twitter">
             <i class="fa-solid fa-right-to-bracket fa-xl"></i>
           </a>
-          -->
+          <% } %>
         </div>
       </header>
       <main>
@@ -93,23 +97,23 @@
               </div>
             </a>
           </li>
-          <!--
+          <% if(typeof userId !== 'undefined') { %>
           <li>
-            <a href="/user">
+            <a href="/mypage">
               <div>
-                <h3>MY PAGE</h3>
-                <p>ZUTOMAYO COUNTERの結果を保存することができます。</p>
+                <h3><%= userName %> さんのMY PAGE</h3>
+                <p>ZUTOMAYO COUNTERの各種結果を保存することができます。</p>
               </div>
             </a>
           </li>
-          -->
+          <% } %>
         </ul>
       </main>
       <footer>
         <div class="footer-content">
           <p>ZUTOMAYO DATABASE</p>
-          <a href="https://twitter.com/ayu_nanet_sun">twitter</a>
-          <a href="https://github.com/ayu1028">github</a>
+          <a href="https://twitter.com/ayu_nanet_sun" target="_blank" rel="noopener noreferrer">twitter</a>
+          <a href="https://github.com/ayu1028" target="_blank" rel="noopener noreferrer">github</a>
         </div>
       </footer>
     </div>

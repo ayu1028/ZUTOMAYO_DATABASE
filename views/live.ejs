@@ -35,11 +35,11 @@
         <a href="/counter">
           ZUTOMAYO COUNTER
         </a>
-        <!--
-        <a href="/counter">
+        <% if(typeof userId !== 'undefined') { %>
+        <a href="/mypage">
           MY PAGE
         </a>
-        -->
+        <% } %>
       </div>
     </nav>
     <div class="container">
@@ -53,11 +53,15 @@
           </a>
         </div>
         <div class="login_button">
-          <!--
-          <a href="#">
+          <% if(typeof userId !== 'undefined') { %>
+          <a href="/logout">
+            <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+          </a>
+          <% } else { %>
+          <a href="/login/twitter">
             <i class="fa-solid fa-right-to-bracket fa-xl"></i>
           </a>
-          -->
+          <% } %>
         </div>
       </header>
       <main>
@@ -87,8 +91,8 @@
       <footer>
         <div class="footer-content">
           <p>ZUTOMAYO DATABASE</p>
-          <a href="https://twitter.com/ayu_nanet_sun">twitter</a>
-          <a href="https://github.com/ayu1028">github</a>
+          <a href="https://twitter.com/ayu_nanet_sun" target="_blank" rel="noopener noreferrer">twitter</a>
+          <a href="https://github.com/ayu1028" target="_blank" rel="noopener noreferrer">github</a>
         </div>
 
       </footer>
