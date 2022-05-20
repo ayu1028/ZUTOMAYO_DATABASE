@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 /* GET home page. */
 router.get('/', async (req, res, next) => {
   const songsAll = await db.song.findAll({
-    order: [['special', 'ASC'], ['id', 'ASC']],
+    order: [['special', 'ASC'], ['releaseDate', 'DESC']],
   });
   res.render('song', { 
     title: 'SONGS | ZUTOMAYO DATABASE',
