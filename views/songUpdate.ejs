@@ -1,0 +1,16 @@
+<form action="/admin/song/update/<%= data.id %>" method="post">
+  <ul>
+    <li>
+      <p><%= data.live.liveTitle %></p>
+    </li>
+    <li>
+      <p><%= data.number %>曲目：<%= data.song.songName %></p>
+    </li>
+    <li>
+      備考：
+      <input type="text" name="remark" value="<%= data.remark %>">
+    </li>
+  </ul>
+  <input type="submit" value="更新">
+</form>
+<a href="/admin/live/<%= data.live.id %>">戻る</a>

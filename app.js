@@ -21,6 +21,7 @@ var counterRouter = require('./routes/counter');
 var songRouter = require('./routes/song');
 var mypageRouter = require('./routes/mypage');
 const logoutRouter = require('./routes/logout');
+const adminRouter = require('./routes/admin');
 
 const setUser = require('./setUser');
 
@@ -72,6 +73,7 @@ app.use('/counter', setUser, counterRouter);
 app.use('/song', setUser, songRouter);
 app.use('/mypage', setUser, mypageRouter);
 app.use('/logout', logoutRouter);
+app.use('/admin', adminRouter);
 
 app.get('/login/twitter', passport.authenticate('twitter'));
 app.get('/oauth/callback/twitter',passport.authenticate('twitter', { failureRedirect: '/' }), async (req, res) => {

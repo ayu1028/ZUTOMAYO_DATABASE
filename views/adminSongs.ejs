@@ -1,0 +1,9 @@
+<%= data[0].live.liveTitle %>
+<ul>
+  <% data.forEach((data) => { %>
+    <li>
+      <a href="/admin/song/<%= data.id %>"><%= data.song.songName %></a>
+    </li>
+  <% }); %>
+</ul>
+<a href="/admin/<%= admin %>">戻る</a>

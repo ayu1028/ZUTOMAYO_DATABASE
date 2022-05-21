@@ -70,10 +70,10 @@
           <% const date = new Date(songData.releaseDate); %>
           <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
           <% if(songData.releaseDate) { %>
-          <p>公開：<%= str %></p>
+          <p>【公開】<br> <%= str %></p>
           <% } %>
           <% if(songData.remark) { %>
-          <p>備考：<%= songData.remark %></p>
+          <p class="remark">【情報】<br><%= songData.remark %></p>
           <% } %>
         </div>
         <% if(songData.youtubeTag) { %>

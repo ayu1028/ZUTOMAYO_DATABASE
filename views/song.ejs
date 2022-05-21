@@ -78,6 +78,8 @@
                 <h3><%= song.songName %></h3>
                 <% if(song.releaseDate) { %>
                 <p>公開：<%= str %></p>
+                <% } else { %>
+                <p><%= song.remark %></p>
                 <% } %>
               </div>
             </a>

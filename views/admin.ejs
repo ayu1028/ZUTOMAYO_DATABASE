@@ -1,0 +1,8 @@
+<ul>
+  <% data.forEach((data) => { %>
+    <li>
+      <a href="/admin/live/<%= data.id %>"><%= data.liveTitle %></a>
+    </li>
+  <% }); %>
+</ul>
+<a href="/">戻る</a>

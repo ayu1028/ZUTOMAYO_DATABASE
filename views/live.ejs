@@ -79,9 +79,15 @@
             <a href="/song/<%= song.songId %>">
               <div>
                 <h2><%= song.number %>. <%= song.song.songName %>
-                  <% if(song.encoreFlag == 1) { %>
+                  <% if(song.encoreFlag === 1) { %>
                     (アンコール)
                   <% } %></h2>
+                  <% if(song.song.special === 2) { %>
+                  <p><%= song.song.remark %></p>
+                  <% } %>
+                  <% if(song.remark) { %>
+                  <p><%= song.remark %></p>
+                  <% } %>
               </div>
             </a>
           </li>
