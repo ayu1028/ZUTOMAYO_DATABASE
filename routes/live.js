@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 
 router.get('/:liveNum', async (req, res, next) => {
   const setlistAll = await db.song_live.findAll({
-    oder: [['number', 'ASC']],
+    order: [['number', 'ASC']],
     where: { liveId: req.params.liveNum },
     include: [
       { model: db.song, required: false },
@@ -18,7 +18,7 @@ router.get('/:liveNum', async (req, res, next) => {
     ]
   });
   const data = {
-    title: 'SETLIST | ZUTOMAYO DATABASE',
+    title: `${live.liveTitle} | ZUTOMAYO DATABASE`,
     songs: setlistAll,
     lives: live
   };

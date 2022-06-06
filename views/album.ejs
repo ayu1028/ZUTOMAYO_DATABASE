@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
+    <meta name="twitter:card" content="summary">
+    <meta property="twitter:title" content="<%= title %>">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://kit.fontawesome.com/f408a441a0.js" crossorigin="anonymous"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -68,68 +70,26 @@
         </div>
       </header>
       <main>
-        <div>
-          <h2><%= songData.songName %></h2>
-          <% const date = new Date(songData.releaseDate); %>
-          <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
-          <% if(songData.releaseDate) { %>
-          <p>【公開】<br> <%= str %></p>
-          <% } %>
-          <% if(songData.remark) { %>
-          <p class="remark">【情報】<br><%= songData.remark %></p>
-          <% } %>
-        </div>
-        <% if(songData.youtubeTag) { %>
-        <h3>MV</h3>
-        <div class="youtube">
-          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/<%= songData.youtubeTag %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <% } %>
-        <% if(songAlbumData.length !== 0) { %>
-          <% const trimAlbumData = songAlbumData.filter((e, index, self) => { %>
-          <% return self.findIndex((el) => el.album.id === e.album.id) === index; %>
-          <% }); %>
-        <h3>収録アルバム</h3>
+        <h2>アルバム情報</h2>
         <ul>
-          <% trimAlbumData.forEach((song) => { %>
+          <% contents.forEach((content) => { %>
+          <% const date = new Date(content.releaseDate); %>
+          <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
           <li>
-            <a href="/album/<%= song.album.id %>">
+            <a href="/album/<%= content.id %>">
               <div>
-                <% const date = new Date(song.album.releaseDate); %>
-                <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
+                <h3><%= content.albumName %></h3>
                 <p>
-                  <%= song.album.albumName %>
-                  <% if(song.album.format === 0) { %>
+                  <%= str %>
+                  <% if(content.format === 0) { %>
                     (デジタルリリース)
                   <% } %>
                 </p>
-                <p><%= str %></p>
               </div>
             </a>
           </li>
-          <% }); %>
+          <% }); %> 
         </ul>
-        <% } %>
-        <% if(songLiveData.length !== 0) { %>
-        <h3>歌われたライブ(回数：<%= songLiveData.length %>回)</h3>
-        <% const trimLiveData = songLiveData.filter((e, index, self) => { %>
-          <% return self.findIndex((el) => el.live.id === e.live.id) === index; %>
-          <% }); %>
-        <ul>
-          <% trimLiveData.forEach((song) => { %>
-          <li>
-            <a href="/live/<%= song.live.id %>">
-              <div>
-                <% const date = new Date(song.live.liveDate); %>
-                <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
-                <p><%= song.live.liveTitle %></p>
-                <p><%= str %></p>
-              </div>
-            </a>
-          </li>
-          <% }); %>
-        </ul>
-        <% } %>
       </main>
       <footer>
         <div class="footer-content">

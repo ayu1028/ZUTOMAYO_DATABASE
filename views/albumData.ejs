@@ -69,67 +69,31 @@
       </header>
       <main>
         <div>
-          <h2><%= songData.songName %></h2>
-          <% const date = new Date(songData.releaseDate); %>
+          <h2><%= album.albumName %></h2>
+          <% const date = new Date(album.releaseDate); %>
           <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
-          <% if(songData.releaseDate) { %>
-          <p>【公開】<br> <%= str %></p>
-          <% } %>
-          <% if(songData.remark) { %>
-          <p class="remark">【情報】<br><%= songData.remark %></p>
-          <% } %>
+          <p>
+            <%= str %>
+            <% if(album.format === 0) { %>
+              (デジタルリリース)
+            <% } %>
+          </p>
         </div>
-        <% if(songData.youtubeTag) { %>
-        <h3>MV</h3>
-        <div class="youtube">
-          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/<%= songData.youtubeTag %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <% } %>
-        <% if(songAlbumData.length !== 0) { %>
-          <% const trimAlbumData = songAlbumData.filter((e, index, self) => { %>
-          <% return self.findIndex((el) => el.album.id === e.album.id) === index; %>
-          <% }); %>
-        <h3>収録アルバム</h3>
+        <h3>収録曲</h3>
         <ul>
-          <% trimAlbumData.forEach((song) => { %>
+          <% songs.forEach((song) => { %>
           <li>
-            <a href="/album/<%= song.album.id %>">
+            <a href="/song/<%= song.songId %>">
               <div>
-                <% const date = new Date(song.album.releaseDate); %>
-                <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
-                <p>
-                  <%= song.album.albumName %>
-                  <% if(song.album.format === 0) { %>
-                    (デジタルリリース)
+                <h2><%= song.number %>. <%= song.song.songName %></h2>
+                  <% if(song.remark) { %>
+                  <p><%= song.remark %></p>
                   <% } %>
-                </p>
-                <p><%= str %></p>
               </div>
             </a>
           </li>
           <% }); %>
         </ul>
-        <% } %>
-        <% if(songLiveData.length !== 0) { %>
-        <h3>歌われたライブ(回数：<%= songLiveData.length %>回)</h3>
-        <% const trimLiveData = songLiveData.filter((e, index, self) => { %>
-          <% return self.findIndex((el) => el.live.id === e.live.id) === index; %>
-          <% }); %>
-        <ul>
-          <% trimLiveData.forEach((song) => { %>
-          <li>
-            <a href="/live/<%= song.live.id %>">
-              <div>
-                <% const date = new Date(song.live.liveDate); %>
-                <% const str = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`; %>
-                <p><%= song.live.liveTitle %></p>
-                <p><%= str %></p>
-              </div>
-            </a>
-          </li>
-          <% }); %>
-        </ul>
-        <% } %>
       </main>
       <footer>
         <div class="footer-content">

@@ -25,10 +25,18 @@ router.get('/:song_id', async (req, res, next) => {
     ],
     order: [[db.live, 'liveDate', 'DESC']]
   });
+  const song_album_data = await db.song_album.findAll({
+    where: { songId: req.params.song_id },
+    include: [
+      { model: db.album, required: false },
+    ],
+    order: [[db.album, 'releaseDate', 'DESC']]
+  });
   res.render('songData', {
     title: 'SONG DATA | ZUTOMAYO DATABASE',
     songData: song_data,
-    songLiveData: song_live_data
+    songLiveData: song_live_data,
+    songAlbumData: song_album_data
   });
 });
 
