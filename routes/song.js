@@ -33,7 +33,7 @@ router.get('/:song_id', async (req, res, next) => {
     order: [[db.album, 'releaseDate', 'DESC']]
   });
   res.render('songData', {
-    title: 'SONG DATA | ZUTOMAYO DATABASE',
+    title: `${song_data.songName} | ZUTOMAYO DATABASE`,
     songData: song_data,
     songLiveData: song_live_data,
     songAlbumData: song_album_data
