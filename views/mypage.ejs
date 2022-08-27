@@ -122,12 +122,15 @@
         <h3>聴いた曲</h3>
         <ul>
           <% countSongs.filter(n => n.times !== 0).forEach((songs) => { %>
+          <% var color = 256 - songs.times * 5 %>
+          <% if(color < 120) { %>
+          <% color = 120; %>
           <li>
             <a class="flexbox" href="/song/<%= songs.id %>">
               <div>
                 <h3><%= songs.songName %></h3>
               </div>
-              <div class="count over10"><%= songs.times %></div>
+              <div class="count" style="background-color: rgb(58, <%= color %>, 89); color: white;"><%= songs.times %></div>
             </a>
           </li>
           <% }); %>
